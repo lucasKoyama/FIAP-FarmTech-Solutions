@@ -63,8 +63,20 @@ def atualizar_dados():
 
 
 def deletar_dados():
-    print("deletando dados")
-
+    global dados
+    opcao = input(
+        "Escolha  opção para realizar a deleção:\n"
+        "1. Deletar uma linha\n"
+        "2. Deletar tudo\n" 
+        "Opção: "
+    )
+    match opcao:
+        case "1":
+            linha_excluida = int(input("Insira o número da linha que deseja excluir:"))
+            del dados[linha_excluida - 1]
+        case "2":
+            dados = []
+            
 
 def exportar_dados():
     print("Exportando dados...")
