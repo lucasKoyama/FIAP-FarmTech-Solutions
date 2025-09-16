@@ -90,7 +90,7 @@ def exportar_dados():
         return
     with open("dados.csv", mode="w", newline="", encoding="utf-8") as arquivo_csv:
         escritor = csv.writer(arquivo_csv)
-        escritor.writerow(["Cultura", "Comprimento", "Largura", "Área", "Insumo"])
+        escritor.writerow(["cultura", "comprimento", "largura", "area", "insumo"])
         escritor.writerows(dados)
 
 
