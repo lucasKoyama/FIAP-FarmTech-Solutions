@@ -1,3 +1,6 @@
+import csv
+
+
 dados = []
 
 
@@ -64,10 +67,12 @@ def atualizar_dados():
 
 def deletar_dados():
     global dados
+    saida_de_dados()
+
     opcao = input(
         "Escolha  opção para realizar a deleção:\n"
         "1. Deletar uma linha\n"
-        "2. Deletar tudo\n" 
+        "2. Deletar tudo\n"
         "Opção: "
     )
     match opcao:
@@ -76,10 +81,17 @@ def deletar_dados():
             del dados[linha_excluida - 1]
         case "2":
             dados = []
-            
+
 
 def exportar_dados():
-    print("Exportando dados...")
+    global dados
+    if not dados:
+        print("Não há dados para exportar.")
+        return
+    with open("dados.csv", mode="w", newline="", encoding="utf-8") as arquivo_csv:
+        escritor = csv.writer(arquivo_csv)
+        escritor.writerow(["Cultura", "Comprimento", "Largura", "Área", "Insumo"])
+        escritor.writerows(dados)
 
 
 while True:
