@@ -15,7 +15,7 @@ def calcular_insumo(area, cultura):
 
 
 def entrada_de_dados():
-    cultura = input("Escolha a cultura desejada:\n " "1. Soja\n " "2. Café\n" "opção: ")
+    cultura = input("Escolha a cultura desejada:\n " "1. Soja\n " "2. Café\n" "Opção: ")
     if cultura == "1":
         cultura = "Soja"
     elif cultura == "2":
@@ -31,28 +31,34 @@ def entrada_de_dados():
 
 def saida_de_dados():
     global dados
+    if len(dados) == 0:
+        print("Não há dados.")
+        return True
     for l in range(0, len(dados)):
         print(
             f"{l+1}. {dados[l][0]}, comprimento = {dados[l][1]}, largura = {dados[l][2]}, area = {dados[l][3]}, insumo = {dados[l][4]}"
         )
+    print("\n")
+    return False
 
 
 def atualizar_dados():
     global dados
-    saida_de_dados()
+    if saida_de_dados():
+        return
 
     linha_alterada = int(input("Insira o número da linha que deseja alterar: "))
     coluna_alterada = input(
         "Insira o número da coluna que deseja alterar:\n"
-        "1. cultura\n"
-        "2. comprimento\n"
-        "3. largura\n"
+        "1. Cultura\n"
+        "2. Comprimento\n"
+        "3. Largura\n"
         "Insira a coluna: "
     )
 
     match coluna_alterada:
         case "1":  # cultura
-            cultura = input("Insira o novo valor:\n1. Soja\n2. Café")
+            cultura = input("Insira o novo valor:\n1. Soja\n2. Café\nNova cultura: ")
             dados[linha_alterada - 1][0] = "Soja" if cultura == "1" else "Café"
         case "2":  # comprimento
             dados[linha_alterada - 1][1] = float(input("Insira o novo valor: "))
@@ -67,7 +73,8 @@ def atualizar_dados():
 
 def deletar_dados():
     global dados
-    saida_de_dados()
+    if saida_de_dados():
+        return
 
     opcao = input(
         "Escolha  opção para realizar a deleção:\n"
@@ -77,7 +84,7 @@ def deletar_dados():
     )
     match opcao:
         case "1":
-            linha_excluida = int(input("Insira o número da linha que deseja excluir:"))
+            linha_excluida = int(input("Insira o número da linha que deseja excluir: "))
             del dados[linha_excluida - 1]
         case "2":
             dados = []
@@ -96,13 +103,13 @@ def exportar_dados():
 
 while True:
     menu = input(
-        "escolha a opção:\n"
-        "1. entrada de dados\n"
-        "2. saída de dados\n"
-        "3. atualizar dados\n"
-        "4. deletar dados\n"
-        "5. sair\n"
-        "opção: "
+        "Escolha a opção:\n"
+        "1. Entrada de dados\n"
+        "2. Saída de dados\n"
+        "3. Atualização de dados\n"
+        "4. Deleção de dados\n"
+        "5. Sair\n"
+        "Opção: "
     )
     print("\n")
     match menu:
@@ -116,6 +123,5 @@ while True:
             deletar_dados()
         case "5":
             exportar_dados()
-            print("Finalizando o programa...")
             break
     print("\n")
